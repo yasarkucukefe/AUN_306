@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Yeni Müşteri Formu</title>
+    <style type="text/css">
+        label {display: block; margin-top: 10px; font:0.8rem Arial;font-weight: bold;}
+        select {padding: 3px}
+        .baslik {font:0.8rem Arial;margin-top: 10px;font-weight: bold}
+    </style>
+</head>
+<body>
+    HTML Form
+    <form action="form.php" method="POST">
+        <label for="isim"><strong>İsim</strong></label>
+        <input required type="text" name="isim" placeholder="İsim"><br>
+        <label for="soyisim">Soyisim</label>
+        <input type="text" name="soyisim" placeholder="Soyisim">
+        <label for="sifre">Şifre</label>
+        <input type="password" name="soyisim" placeholder="Şifre">
+
+        <fieldset style="margin-top: 5px;width: 200px">
+            <legend>Takım bilgileri</legend>
+            <label for="takim">Tuttuğunuz takım</label>
+            <select name="takim" title="İstanbul takımları listeleniyor.">
+                <option value="0">Lütfen seçiniz</option>
+                <option value="1">Fenerbahçe</option>
+                <option value="2">Galatasaray</option>
+                <option value="3">Beşiktaş</option>
+                <option value="4">Başakşehir</option>
+                <option value="5">Takım tutmuyorum</option>
+            </select>
+
+            <div>
+                <div class="baslik" title="1 en az, 3 en fazla (fanatik derecesinde)">Taraftarlık dereceniz?</div>
+                <table>
+                    <thead><tr><th>1</th><th>2</th><th>3</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" name="taraftar" value="1"></td>
+                            <td><input type="radio" checked name="taraftar" value="2"></td>
+                            <td><input type="radio" name="taraftar" value="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        
+
+        <label>Adres</label>
+        <textarea rows="3" style="width: 40%" placeholder="Adres bilgileriniz"></textarea>
+        <br>
+        <input type="submit" name="gonder" value="Kaydet">
+
+
+    </form>
+</body>
+</html>
