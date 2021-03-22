@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4. Hafta</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .renk {padding: 10px; margin-right: 10px; width: 50px; height: 40px}
+        .renk_ad {font-family: arial;}
+        .renkler {display: flex; text-align: center}
+        .mavi {background-color: blue; color:blue;}
+        .sari {background-color: yellow; color:yellow;}
+        .yesil {background-color: green; color:green;}
+        .siyah {background-color: black; color:black;}
+        .kirmizi {background-color: red;color:red;}
+        .turuncu {background-color: orange; color:orange;}
+
+        .mavi_metin {color:blue;font-size: 3rem;}
+        .sari_metin {color:yellow;font-size: 3rem;}
+        .yesil_metin {color:green;font-size: 3rem;}
+        .siyah_metin {color:black;font-size: 3rem;}
+        .kirmizi_metin {color:red;font-size: 3rem;}
+        .turuncu_metin {color:orange;font-size: 3rem;}
+    </style>
+    <script src='app.js' defer></script>
+</head>
+<body>
+    <nav>TÜRKÇE RENK ADLARI</nav>
+    <section>        
+        <div class='renkler'>
+            <div onclick="div_renk_secildi(0)" class='renk mavi'></div>
+            <div onclick="div_renk_secildi(1)" class='renk sari'></div>
+            <div onclick="div_renk_secildi(2)" class='renk yesil'></div>
+            <div onclick="div_renk_secildi(3)" class='renk siyah'></div>
+            <div onclick="div_renk_secildi(4)" class='renk kirmizi'></div>            
+            <div onclick="div_renk_secildi(5)" class='renk turuncu'></div>            
+        </div>
+        <div class='renk_ad' id='renk_ad'>BİR RENK SEÇİNİZ</div>
+        <div id='renk_ad_eng'></div>
+    </section>
+</body>
+</html>
