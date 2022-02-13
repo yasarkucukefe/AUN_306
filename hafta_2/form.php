@@ -1,6 +1,0 @@
-
-
-Üyelik bilgileriniz alınmıştır.
-
-
-

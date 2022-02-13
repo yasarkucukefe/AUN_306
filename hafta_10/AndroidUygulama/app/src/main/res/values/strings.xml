@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">Android Uygulaması</string>
-    <string name="merhaba">Hava Durumu Bilgileri</string>
-    <string name="metin">Bu uygulama seçilen şehir için güncel hava durumunu gösterir. Listeden şehir seçimi yapabilirsiniz.</string>
-</resources>
