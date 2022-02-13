@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
-            //Log.d("timer","thick");
-            kalan_sure--;
+            kalan_sure = kalan_sure - 2;
             if(kalan_sure>0){timerHandler.postDelayed(this, 1000);}
             gosterKalanSure();
         }
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ll_sureler = findViewById(R.id.sureler);
 
         gosterKalanSure();
+
         btn_eylem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

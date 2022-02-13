@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv_baslik, tv_metin, tv_sicaklik, tv_hava_durumu;
+    TextView tv_baslik, tv_metin, tv_sicaklik, tv_hava_durumu, metin_kutusu;
     ImageView img_hava_durumu;
     String sehir = "Istanbul,tr";
 
@@ -56,11 +56,17 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Yaşam Döngüsü Evresi: onCreate",Toast.LENGTH_LONG).show();
 
         hava_durumunu_getir();
+
+
+        String[] rakamlar = {"0","1","2","3","4","5","6"};
+        String rakam = rakamlar[0] + 1;
+        Log.d("rakam", rakam);
+
     }
 
     private void hava_durumunu_getir(){
         GetHavaDurumu ghd = new GetHavaDurumu();
-        ghd.execute(sehir,this);
+        ghd.execute("Istanbul",this);
     }
 
     public void goster_hava_durumu(String resp) throws JSONException {
@@ -69,7 +75,13 @@ public class MainActivity extends AppCompatActivity {
         double temp = json.getJSONObject("main").getDouble("temp")-273;
 
         tv_sicaklik.setText(String.format("%.1f",temp));
+
+
+        metin_kutusu.setText("Yeni Metin");
     }
+
+
+
 
     private void mesaj_goster(String mesaj, boolean kisa_sureli){
         int sure = Toast.LENGTH_LONG;

@@ -58,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
                 giden_ziyaretci();
             }
         });
+
+
+        Log.d("rakam",buyukHarf("ybs306"));
+
+
+        String[] meyveler = {"Elma","Armut","Erik"};
+        int topla = 0;
+        for(String meyve:meyveler){
+            topla += meyve.length();
+        }
+        Log.d("topla",topla+" harf");
+
     }
 
     @Override
@@ -235,6 +247,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(anahtar,yeniRakam);
         editor.commit();
+    }
+
+    private String buyukHarf(String deger){
+        return deger.toUpperCase()+" "+deger.replace("306","");
     }
 
 
