@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Javascript</title>
+
+    <script>
+
+        const a1 = 10, b = 20, c = 30, isim = "Ahmet";
+        const obj1 = {a1 : 10, b : 20, c : 30, isim : "Ahmet"};
+
+        const obj2 = {a1, b, c, isim};
+        // {10, 20, 30, "Ahmet"}
+        // {a1 : 10, b : 20, c : 30, isim : "Ahmet"};
+
+        const araba = {
+            marka: "BMW",
+            model: "X5",
+            renk: "Kırmızı",
+            yakit: "Dizel",
+            motorHacmi: "2.0",
+            motorGucu: "100",
+            fiyat: "100.000",
+            kapasite: 5,
+            hiz: 120,
+            aciklama: "Kapasite 5, hız 120 km/h",
+            oncekiSahipler: ["Ahmet","Mehmet","Ali","Veli","Ayşe"],
+            kullanilanYakit: function(){
+                console.log(this.yakit);
+            }
+        };
+
+        let a = 20;
+
+        function test() {
+            let a = 10;
+            console.log(a);
+            a = 30;
+        }
+
+        function test2() {
+            let a = 10;
+            console.log(a);
+        }
+        
+        // eski fonksiyon tanımlama
+        function mesaj_goster(mesaj_text){
+            alert(mesaj_text);
+        }
+
+        // ES6 fonksiyon formatı
+        const yeni_mesaj_gostr = (mesaj) => {+
+            alert(mesaj);
+        };
+
+
+        const sayac_baslat = () => {
+            if(sayacAktif){return;}
+            sayacAktif = true;
+            document.querySelector("#btn-sayac").style.display = 'none';
+            setInterval(bir_arttir, 1000);
+        };
+
+        let sayacAktif = false;
+
+        const bir_arttir = () => {
+            document.querySelector("#sayac").innerText ++;
+        };
+
+  
+
+    </script>
+</head>
+<body>
+
+    <div onclick="this.innerText = Date()">Saat kaç? Öğrenmek için tıkla</div>
+
+    <button onclick="mesaj_goster('iPhone 13Pro Kazandınız.')">Click me</button>
+
+    <div id='sayac' style="font-size: 5em; background-color: darkblue; color:white; text-align:center">0</div>
+    <button id="btn-sayac" onclick="sayac_baslat()">Sayacı başlat</button>
+
+<div id="div-haber" style="display: none;">
+    <h1>Haber Başlığı</h1>
+    <h2>Haber İçeriği ... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Detaylar geliyor.</h2>
+</div>
+    
+
+</body>
+</html>

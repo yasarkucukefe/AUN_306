@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Javascript</title>
+
+    <style>
+        .sayac-btn {
+            font-size: 2em;
+            width: 5em;
+        }
+    </style>
+
+    <script>
+        // Javascript yorum
+        const a = 2; // Sabit değerler (kod çalışırken 'yeni bir değer atanmayacak')
+
+        let b = 3; // değiştirebilir değerler için let
+        b = a + b;
+
+        const merhabaJS = () => {alert('Merhaba');};
+
+        const degistir = () => {
+            const h1 = document.querySelector("h1");
+            h1.innerText = "Javascript kullarak değiştirildi!";
+        };
+
+        const counterEkleAzalt = (i) => {
+            const sayac = document.querySelector("#sayac");
+            const rakam = sayac.innerText;
+            const yeni_rakam = parseInt(rakam) + i;
+            if(yeni_rakam < 0) {return;}
+            sayac.innerText = yeni_rakam; // innerText: element içerik metnini değiştir.
+        };
+
+        const resetCounter = () => {
+            const sayac = document.querySelector("#sayac");
+            sayac.innerText = "0";
+        };
+
+        const e = '1';
+        const f = 1;
+        if (e == f) { // == ile JS kendisi data type dönüşümü yapabilir.
+            console.log("elma"); // çıktı.
+        }else{
+            console.log("armut");
+        }
+
+        // === ile JS data type dönüşümü yapmaz.
+        if (e === f) { // == ile JS kendisi data type dönüşümü yapabilir.
+            console.log("elma"); 
+        }else{
+            console.log("armut"); // çıktı
+        }
+
+        //
+        const sonuc = e == f === false;
+        if(sonuc) {
+            console.log("elma");
+        }else{
+            console.log("armut");
+        }
+
+        // mod %
+        const kalan = 5 % 4; // 1
+
+        // azaltmak / arttırmak (increment - decrement)
+        let i = 5;
+        i++; // i = i + 1
+        i--; // i = i - 1
+        console.log(i++); // 5
+        console.log(i); // 6
+
+        const g = i++;
+        console.log(g); // 6
+
+    </script>
+</head>
+<body>
+    <h1>Javascript</h1>
+
+    <button onclick="merhabaJS()">Merhaba Javascript</button>
+    
+    <button onclick="degistir()">Değiştir</button>
+
+    <section style='margin-top:10px'>
+        <div id='sayac' style="font-size: 10em; font-family: monospace; text-align: center; padding: 10px; border:1px lightgreen solid;">
+            0
+        </div>
+
+        <div style="display: flex; justify-content: space-between;margin-top:5px">
+            <div>
+                <button class="sayac-btn" onclick="counterEkleAzalt(1)">+</button>
+                <button class="sayac-btn" onclick="counterEkleAzalt(-1)" style='margin-left:10px;'>-</button>
+            </div>
+            <div>
+                <button onclick="resetCounter()">Reset</button>
+            </div>            
+        </div>
+
+    </section>
+
+</body>
+</html>
