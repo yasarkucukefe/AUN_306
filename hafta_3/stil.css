@@ -1,8 +1,0 @@
-.grid {
-    border: 5px solid blue;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-}
-.grid > div {border:  1px solid black; font-size: 30px; text-align: center}
-
-.kalin_harf {font-weight: bold;}
