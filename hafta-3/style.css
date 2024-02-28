@@ -1,0 +1,19 @@
+div {padding: 5px}
+
+.reklam {
+	border:1px solid red;
+	margin-left:5px;
+}
+
+.kutu {
+	color: darkcyan;
+	border:1px dotted darkblue;
+	padding: 5px;
+	cursor:pointer;
+}
+
+#div-2{
+	background-color: yellow;
+}
+
+.kutu:hover{background-color: lightcyan;}
