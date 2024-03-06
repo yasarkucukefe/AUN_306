@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hesap Makinesi</title>
+	<style type="text/css">
+		.rakam {padding:5px; background-color: lightgray; margin-right: 20px; border:1px solid transparent;}
+		.rakam:hover {border:1px solid darkblue;}
+	</style>
+
+	<script>
+		const buton_pressed = (btn) => {
+			console.log(btn);
+			
+		}
+
+
+
+	</script>
+</head>
+<body>
+	<h1>Hesap Makinesi</h1>
+	<div>
+		<div id='sonuc'>SONUC</div>
+		<div id='islem'></div>
+		<div id='rakamlar'>
+			<div id='row-1' style='display: flex;'>
+				<div onclick="buton_pressed(1)" class='rakam'>1</div>
+				<div onclick="buton_pressed(2)" class='rakam'>2</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
