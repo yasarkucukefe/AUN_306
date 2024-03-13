@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Anket</title>
+
+	<style type="text/css">
+		.sorular {padding:10px; border:1px solid lightgray;}
+		.soru{padding: 5px; border-bottom: 1px solid green}
+		label{font-weight: bold}
+		input {padding: 5px}
+		select {padding: 5px}
+	</style>
+
+	<script>
+		function ulke_degisti(){
+			//JSON Object
+			const sehirler = {
+				"TR":["İstanbul","Ankara","İzmir"],
+				"UK":["London","Manchester","Birmingham"],
+				"FR":["Paris","Lyon","Strasbourg"],
+			}
+
+			const seciliUlke = document.getElementById("ulkeler").value
+
+			const ulkeSehirler = sehirler[seciliUlke];
+
+			const selectSehirler = document.getElementById("sehirler");
+
+			selectSehirler.innerHTML = "";
+
+			ulkeSehirler.forEach(sehir => {
+				console.log(sehir);
+				selectSehirler.innerHTML += `<option>${sehir}</option>`;
+			});
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Müşteri Anketi</h1>
+	<ol style='display:none'>
+		<li>Adınız Soyadınız:</li>
+		<li>Telefon numaranız:</li>
+	</ol>
+
+	<div class='sorular'>
+
+		<form action="index.php" method="POST">
+			<fieldset>
+				<legend>İletişim Bilgileri:</legend>
+				<div class='soru'>
+					<label>İsim Soyisim</label>
+					<input type="text" name="s1" required placeholder="İsim Soyisim">
+				</div>
+
+				<div class='soru'>
+					<label>Telefon No:</label>
+					<input type="text" name="s2" placeholder="(5xx) 123 45 67">
+					<input type="tel" name="s3" placeholder="532-124-45-46" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+				</div>
+
+				<div class='soru'>
+					<label>E-posta</label>
+					<input type="email" required name="s4">
+				</div>
+
+				<div class='soru'>
+					<label>Yaşınız</label>
+					<input type="number" required name="s10">
+				</div>
+
+				
+			</fieldset>
+			
+			<div class='soru'>
+				<label>Ülke</label>
+				<select name='ulkeler' id='ulkeler'>
+					<option value="TR">Türkiye</option>
+					<option value="UK">İngiltere</option>
+					<option value="FR">Fransa</option>
+				</select>
+
+				<script>
+					const selectUlke = document.getElementById("ulkeler");
+
+					selectUlke.addEventListener('change', ulke_degisti);
+					
+				</script>
+
+				<label>Şehir</label>
+				<select name='s6' id='sehirler' onchange="ulke_degisti()">
+					<option>İstanbul</option>
+					<option>Ankara</option>
+					<option>İzmir</option>
+				</select>
+			</div>
+
+			<div class="soru">
+				<label style="display:block">Yorumlarınız</label>
+				<textarea style="width:100%" name='s7' nrows='3' ncols='100' placeholder="Yorumunuzu bu bölüme yazınız. Yazım ve noktalama kurallarına uymanızı rica ederiz."></textarea>
+			</div>
+
+			<div class="soru">
+				<label style="display:block">Bizi nereden duydunuz?</label>
+				<ul style="list-style-type: none;">
+					<li><input type="radio" name="kaynak">Sosyal Medya (Facebook, TikTok)</li>
+					<li><input type="radio" name="kaynak">Arkadaş Çevresi</li>
+					<li><input type="radio" name="kaynak">Reklamlar</li>
+					<li><input type="radio" name="kaynak">Telefon, SMS ile ulaşıldı.</li>
+				</ul>
+			</div>
+
+			<div class="soru">
+				<label style="display:block">Bizi puanlayın</label>
+				<input type="radio" name="star1">
+				<input type="radio" name="star2">
+				<input type="radio" name="star3">
+				<input type="radio" name="star4">
+				<input type="radio" name="star5">
+			</div>
+
+			<div class="soru">
+				<label>En çok kullandığınız web tarayıcısını seçiniz:</label>
+				<select>
+					<option>Google Chrome</option>
+					<option>Microsoft Edge</option>
+					<option>Safari</option>
+					<option>Yandex</option>
+					<option>Yahoo</option>
+					<option>Firefox</option>
+					<option>Opera</option>
+				</select>
+
+				<label>Datalist ile seçim:</label>
+				<input list="datalist-browsers" name="browser" id="browser">
+
+				<datalist id='datalist-browsers'>
+					<option>Google Chrome</option>
+					<option>Microsoft Edge</option>
+					<option>Safari</option>
+					<option>Yandex</option>
+					<option>Yahoo</option>
+					<option>Firefox</option>
+					<option>Opera</option>
+				</select>
+
+			</div>
+
+
+
+			<div class="soru">
+				<label>Anketimizi puanlayınız:</label>
+				<input type="range" id="rangeInput" name="puanla" value="50" min="0" max="100">
+				<span id="rangeValue" style="font-size: 20px; color: darkblue; padding: 5px; border:1px solid salmon;">50</span>
+			</div>
+
+			<script>
+				//JavaScript kod: bir "range" input'un değerini göstermek
+				// Get references to the range input and value display elements
+				  const rangeInput = document.getElementById('rangeInput');
+				  const rangeValue = document.getElementById('rangeValue');
+
+				  // Define a function to update the display
+				  const updateValueDisplay = () => {
+				    rangeValue.textContent = rangeInput.value;
+				  };
+
+				  const mesaj_goster = () => {
+				  	alert("Merhaba")
+				  }
+
+				  //rangeValue.addEventListener('click', mesaj_goster)
+
+				  // Attach the event listener to the input
+				  rangeInput.addEventListener('input', updateValueDisplay);
+
+				  // Initialize the display
+				  updateValueDisplay();
+
+
+			</script>
+
+			<div class="soru">
+				<input type="checkbox" name="onay">
+				<label> Benimle iletişime geçilmesini onaylıyorum.</label>
+			</div>
+
+
+			<input type="submit" name="submit" value='Gönder'>
+
+		</form>
+		
+		
+
+
+	</div>
+
+
+
+</body>
+</html>
