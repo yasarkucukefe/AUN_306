@@ -16,5 +16,5 @@ const received_json = (json) => {
 
 fetch('https://dummyjson.com/products/1')
 .then(res => res.json())
-.then(json => received_json(json))
+.then(json => console.log(json))
 
