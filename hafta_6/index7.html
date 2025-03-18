@@ -1,0 +1,89 @@
+<html>
+    <head>
+
+        <style>
+
+            th, td {border:1px solid lightgray; padding: 5px;}
+
+            table {border-collapse: collapse;}
+
+            thead tr { background-color: aquamarine}
+
+            tbody tr:hover {background-color: yellow; cursor: pointer;}
+
+           
+            tbody tr:nth-child(even) {
+                background-color: lightblue;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>HTML Tabloları</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Şehir</th>
+                    <th>İlçe</th>
+                    <th>Hava Durumu</th>
+                    <th>Sıcaklık</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>İstanbul</td>
+                    <td>Kadıköy</td>
+                    <td>Sağanak Yağmur</td>
+                    <td style="text-align: center;">11 °C</td>
+                </tr>
+                <tr>
+                    <td>İstanbul</td>
+                    <td>Beşiktaş</td>
+                    <td>Parçalı Bulutlu</td>
+                    <td style="text-align: center;">14 °C</td>
+                </tr>
+                <tr>
+                    <td>İzmir</td>
+                    <td>Konak</td>
+                    <td>Güneşli</td>
+                    <td style="text-align: center;">19 °C</td>
+                </tr>
+                <tr>
+                    <td>Ankara</td>
+                    <td>Çankaya</td>
+                    <td>Parçalı Bulutlu</td>
+                    <td style="text-align: center;">9 °C</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="margin-top:30px">
+            <thead>
+                <tr>
+                    <th colspan="2">Meyveler</th>
+                    <th colspan="3">Sebzeler</th>
+                </tr>
+                <tr>
+                    <th>Elma</th>
+                    <th>Armut</th>
+                    <th>Havuç</th>
+                    <th>Patates</th>
+                    <th>Soğan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12</td><td rowspan="3" style="text-align: center;">?</td><td>3</td><td>9</td><td>4</td>
+                </tr>
+                <tr>
+                    <td>11</td><td>4</td><td>7</td><td>45</td>
+                </tr>
+                <tr>
+                    <td>10</td><td>7</td><td>8</td><td>45</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
