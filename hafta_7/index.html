@@ -1,0 +1,100 @@
+<!-- HTML standart yapıyı hızlıca oluşturmak için boş bir html dosyasında ! + Tab veya ! + Enter   -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">  <!-- Türkçe karakter (veya farklı diller) desteği için -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil cihazlar için responsive -->
+    <title>Hafta-7 Dersi</title>
+
+    <style>
+        ol li {font-family: 'Courier New', Courier, monospace;}
+    </style>
+</head>
+<body style="padding-bottom: 200px;">
+    <h1>HTML Listeler</h1>
+    
+    <h3>Sıralı Listeler (ordered list)</h3>
+    <p>En popüler yazılım dilleri:</p>
+    <ol>
+        <li>Python</li> <!-- List Item (liste elemanı)-->
+        <li>Javascript</li>
+        <li>C / C++</li>
+    </ol>
+
+    <h3>Sırasız Listeler (unordered list)</h3>
+    <p>Yazılımcıların en çok tercih ettiği içecekler</p>
+    <ul>
+        <li>Kahve</li>
+        <li>Çay</li>
+        <li>Ice tea</li>
+    </ul>
+
+    <h3>Açıklama Listeleri (Description Lists)</h3>
+    <p>İçecekler</p>
+    <dl>
+        <dt>Kahve</dt>
+        <dd>- Filtre, Espresso, Latte -</dd>
+        <dt>Çay</dt>
+        <dd>- Early Grey, Tirebolu 42 -</dd>
+    </dl>
+
+    <h3>Sıralı Listelerin Stil Özellikleri</h3>
+    <ul style="list-style-type: circle;">
+        <li>Kahve</li>
+        <li>Çay</li>
+        <li>Ice tea</li>
+    </ul>
+
+    <h3>Sıralı Listelerin Stil Özellikleri</h3>
+    <ul style="list-style-type: square;"> 
+        <li>Kahve</li>
+        <li>Çay</li>
+        <li>Ice tea</li>
+    </ul>
+
+    <h3>Sıralı Listelerin Stil Özellikleri</h3>
+    <ul style="list-style-type: none;"> 
+        <li>Kahve</li>
+        <li>Çay</li>
+        <li>Ice tea</li>
+    </ul>
+
+    <h3>İç içe Listeler - Nested Lists</h3>
+    <p>İçecek Menüsü</p>
+    <ul> 
+        <li>Kahveler
+            <ul>
+                <li>Latte</li>
+                <li>Americano</li>
+                <li>Espresso</li>
+            </ul>
+        </li>
+        <li>Çay
+            <ul>
+                <li>Yeşil Çay</li>
+                <li>Siyah Çay
+                    <ul>
+                        <li>Tirebolu 42</li>
+                        <li>Early Grey</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <h3>Sıralı Listelerin Numaralandırması</h3>
+    <p> Atatürk hangi yıl dünyaya gelmiştir?</p>
+    <ol type="a"> <!-- Liste elemanlarının listelenmesi a,b,c,d...-->
+        <li>1881</li>
+        <li>1890</li>
+        <li>1885</li>
+        <li>1884</li>
+    </ol>
+
+    
+
+
+</body>
+</html>
