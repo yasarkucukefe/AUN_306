@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Formları</title>
+
+    <style>
+        .bold { font-weight: bold;}
+        input {padding: 5px; border-radius: 6px;}
+        div {padding: 10px;}
+        select {padding:3px}
+    </style>
+</head>
+<body>
+
+    <h2>Yeni Kullanıcı</h2>
+
+    <form action="formAction.html" method="POST">
+        <label class="bold" for="fname">İsim:</label><br>
+        <input id="fname" type="text" required> <br><br>
+        <label class="bold" for="lname">Soyisim:</label><br>
+        <input id="lname" type="text" required><br><br>
+
+        <label class="bold" for="eposta">Eposta:</label><br>
+        <input id="email" type="email" required placeholder="E-posta adresiniz"><br><br>
+
+        <div>   
+            <textarea name="yorum" id="yorum" placeholder="Yorumlarınızı yazınız." style="width: 100%;"></textarea>
+
+        </div>
+
+        <label for="web">Favori web tarayıcınız:</label>
+        <input name="web" type="text" list="browsers">
+        <datalist id="browsers">
+            <option value="Google Chrome">
+            <option value="Edge">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Opera">
+        </datalist>
+
+        <div>
+            <label for="egitim">Eğitim Durumunuz:</label>
+            <select name="egitim" id="egitim">
+                <option value="1">Lise mezunu</option>
+                <option value="2">Üniversite mezunu</option>
+                <option value="3">Y.Lisans / Doktora</option>
+            </select>
+        </div>
+
+        <div>
+            Favori programlama diliniz hangisidir? <br>
+            <input type="radio" id="python" name="fav_lang"> <label for="python">Python</label><br>
+            <input type="radio" id="js" name="fav_lang"> <label for="js">Javascript</label><br>
+            <input type="radio" id="cs" name="fav_lang"> <label for="cs">C#</label><br>
+        </div>
+
+
+
+
+        <div style="margin-top: 5px; padding:10px;">
+            <input type="checkbox" name="cb" id="cb">
+            <label for="cb" style="font-weight: normal;">Kişesel verilerimin kullanımını onaylıyorum.</label>
+        </div>
+
+        <input type="submit" value="Kayıt ol">
+    </form>
+    
+</body>
+</html>

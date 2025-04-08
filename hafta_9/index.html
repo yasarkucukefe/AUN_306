@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .haber {border:1px solid blue; padding: 10px;}
+
+        .rakam {
+            padding:20px; 
+            background-color: beige;
+        }
+
+        .rakamlar {
+            background-color: blue; 
+            padding:10px; 
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>CSS Flexbox </h1>
+    <p>Flexbox: Flexible Box Layout Module</p>
+
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+    </div>
+
+    <div class="rakamlar" style="display: flex; flex-direction: row-reverse; column-gap: 10px;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+    </div>
+
+    <div class="rakamlar" style="display: flex; justify-content: space-between;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+    </div>
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px; justify-content: center;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+    </div>
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px; justify-content: flex-end;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+    </div>
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px; justify-content: space-between;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+        <div class='rakam'>4</div>
+    </div>
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px; justify-content: space-evenly;">
+        <div class='rakam'>1</div>
+        <div class='rakam'>2</div>
+        <div class='rakam'>3</div>
+        <div class='rakam'>4</div>
+    </div>
+
+    <div class='rakamlar' style="display: flex; column-gap: 10px; justify-content: space-evenly; height: 100px; align-items: center;">
+        <div class='rakam' style='height: 20px;'>1</div>
+        <div class='rakam' style='height: 20px;'>2</div>
+        <div class='rakam' style='height: 20px;'>3</div>
+    </div>
+
+
+    <div class="rakamlar" style="height: 120px; display: flex; justify-content: center; align-items: center;">
+        <div class='rakam' style="width:30px; height: 20px;text-align: center;">12</div>
+
+    </div>
+
+
+    <div class='rakamlar' style="display: flex; justify-content: space-between;">
+        <div style="display: flex; column-gap: 10px;">
+            <div class='rakam' style='height: 20px;'>1</div>
+            <div class='rakam' style='height: 20px;'>2</div>
+            <div class='rakam' style='height: 20px;'>3</div>
+        </div>
+        <div style="display: flex; column-gap: 10px">
+            <div class='rakam' style='height: 20px;'>4</div>
+            <div class='rakam' style='height: 20px;'>5</div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; ">
+        <div>
+            <h2>Günün Haberleri</h2>
+        </div>
+        <div>
+            <a href="#">Hava Durumu</a>
+        </div>
+    </div>
+
+    <div style="display: flex; column-gap: 10px;">
+        <div class='haber'>
+            <div><h2>Bölüm A</h2></div>
+            <div>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae dolor non temporibus mollitia tempora qui exercitationem aliquid necessitatibus doloribus est perspiciatis voluptatibus, illo explicabo quos, numquam praesentium iusto quia.
+            </div>
+        </div>
+    
+    
+        <div class='haber'>
+            <div><h2>Bölüm B</h2></div>
+            <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad est provident illo doloremque! Corrupti, suscipit molestiae veniam amet illum, error maiores obcaecati ipsa, ratione sint magnam rerum eum. Ad, ex.
+            </div>
+        </div>
+    
+        <div class='haber'>
+            <div><h2>Bölüm C</h2></div>
+            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse minus ea qui, nobis eum sunt ipsa incidunt laudantium tempora fugiat! Quaerat facilis exercitationem necessitatibus commodi voluptatibus, ad soluta impedit assumenda!
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>
+
