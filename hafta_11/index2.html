@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <h1>Javascript</h1>
+    <p> HTML ve CSS ile birlikte web geliştirmede kullanılan 3 dilden bir tanesidir.</p>
+    <p>Web sayfaların dinamizm ekler. Sayfa içeriklerinin değiştirilmesini sağlar.</p>
+
+    <h2>Dinamik başlık</h2>
+    <button onclick="dinamikBaslik()">Değiştir</button>
+
+    <h3>JavaScript (JS) Değişkenler (Variables)</h3>
+    <ul>
+        <li>var</li>
+        <li>const</li>
+        <li>let</li>
+    </ul>
+
+    
+    <script>
+
+        // Değişkenler
+        var a = 2; // a değişkeni
+        a = 4;
+        const b = 3; // b değişkenine yeni bir değer atanamayacak şekilde deklare edildi.
+        // b = 6; // hata üretir. const değişkenlerine yeni bir değer atanamaz.
+        let c = 5; // let değişkenlerine sonradan farklı değerler atanabilir.
+        c = 8
+
+        // Operatorler
+        let x = 10;
+        let y = 20;
+        let z = x * y;
+        let aa = x + y;
+        let d = x - y;
+        let e = x / y;
+        let f = x % 3; // Bölme sonucu kalan değer , 10 % 3 = 1; Modulus
+        x++; // x'in değer +1 artar
+        x--; // x'in değeri 1 azalır
+
+
+        // JS Karşılaştırma Operatörleri
+        const cc = 1;
+        const dd = "1";
+        
+        if(cc == dd){ // sadece değer kontrolü
+            console.log("cc = dd (değer)");
+        }else{
+            console.log("cc ile dd değer olarak eşit değildir.");
+        }
+     
+        if(cc === dd){ // hem değer, hem de datatype kontrolü
+            console.log("cc === dd");
+        }else{
+            console.log("cc ile dd değer ve data type olarak eşit değildir.");
+        }
+
+       if(x>5){
+        console.log("x değeri 5'ten büyüktür");
+       }else{
+        console.log("x değeri 5'ten küçük veya 5'tir.");
+       }
+
+       if(x != 5){ // değer kontrolü ile eşitlik kontrolü
+        console.log("x değeri 5'e eşit değildir.")
+       }
+
+       if(x !== 5){ // değer ve datatype kontrolü ile eşitlik kontrolü
+        console.log("x değeri 5'e eşit değildir ve datatype integer değildir.")
+        }
+
+       if(x>=5){
+        console.log("x değeri 5'ten büyük veya 5'tir.");
+       }else{
+        console.log("x değeri 5'ten küçüktür.");
+       }
+       
+       function dinamikBaslik(){
+        document.querySelector("h2").innerHTML = "Yeni bir başlık";
+       }
+
+       const dinamik_baslik = () => {
+
+       }
+
+
+
+
+    </script>
+</body>
+</html>

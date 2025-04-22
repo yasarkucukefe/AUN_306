@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>JS Koşul Kontrolleri</h2>
+
+    <script>
+        let a = 2;
+        let b = 3;
+        let c = 4;
+
+        if( a>1 && b>2){ // &&: ve kontrolü
+            //...
+        }
+
+        if( a>1 || b>2){ // ||: veya kontrolü
+            //...
+        }
+
+        // Ternary operatörü
+        const yas = 17;
+        let mesaj = "Yaş kontrolü";
+        if(yas > 18){
+            mesaj = "Ürünü satın alabilirsiniz.";
+        }else{
+            mesaj = "Ürünü satın alamazsınız.";
+        }
+        console.log(mesaj);
+
+        // (logic kontrol) ? true_deger : false_deger
+        const msg = yas > 18 ? "Ürünü satını alabilirsiniz" : "Ürünü satın alamazsınız";
+       
+        // 
+        
+        let d = a == 2 === false; // false
+        console.log(d);
+
+        a = "1";
+        let e = a == 1 === true; // true
+        console.log(e);
+
+
+        // Fonksiyonlar
+        function fonksiyon1(a, b){
+            return a * b;
+        }
+
+        let sonuc1 = fonksiyon1(3, 4); // 12
+
+        function fonksiyon2(a, b, c=2){
+            return a + b + c;
+        }
+
+        let sonuc2 = fonksiyon2(4, 5, 6); // 15;
+        console.log(sonuc2);
+
+        let sonuc3 = fonksiyon2(4, 5); // 11;
+        console.log(sonuc3);
+
+        const fonksiyon3 = (a, b, c=2) => {
+            return a + b + c;
+        }
+
+        // Objects. JSON: JavasScript Object Notation
+        const araba = {model:"X10", renk: "Mavi", motor: "Elektrik", sene:2025};
+        console.log(araba);
+
+        console.log(araba.model); // X10
+        console.log(araba["model"]); //10
+
+        araba.model = "X20";
+        araba["renk"] = "Kırmızı";
+        console.log(araba.model);
+
+        araba["km"] = 10220; // yeni özellikler eklenebilir.
+        araba.menzil = 500;
+
+        //
+        const personel = {}; // const personel = new Object();
+        personel.isim = "Yaşar";
+        personel.soyisim = "Küçükefe";
+        personel.age = 54;
+        console.log(personel);
+
+        const meyve = new Object();
+        meyve.ad = "Elma";
+        meyve.fiyat = 50;
+        console.log(meyve);
+
+        const x = 1;
+        const y = 2;
+        const z = 3;
+        const xyz = {
+            x : x,
+            y : y,
+            z : z,
+        };
+
+        const xyz2 = {x, y, z}; // {x:x, y:y, z:z} ile aynı işlem
+        console.log(xyz2); // {x: 1, y: 2, z: 3}
+
+        const xyz3 = {
+            x : x,
+            y : y,
+            z : z,
+            xz : {
+                xx : 3,
+                xa : 2
+            }
+        };
+
+        console.log(xyz3.xz.xa); // 2
+
+        const msg_ = "a = " + a + ", b = " + b;
+        console.log(msg_); // a = 1, b = 3
+
+        const msg2 = `a = ${a}, b = ${b}`;
+        console.log(msg2); // a = 1, b = 3
+
+        const msg3 = `a = ${a}, b = ${b}, a + b = ${a + b}`;
+        console.log(msg3); // a = 1, b = 3, a + b = 13;
+
+        const msg4 = `a = ${a}, b = ${b}, a + b = ${+a + +b}`;
+        console.log(msg4); // a = 1, b = 3, a + b = 4;
+
+        
+
+
+    </script>
+    
+</body>
+</html>

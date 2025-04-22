@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JavaScript</h1>
+
+    <p>Büyük harfe dönüştür</p>
+    <input type="text" id="metin" onkeydown="metinDegisti()" onchange="metinDegisti()" placeholder="Metin yazınız.">
+    <button onclick="yeniMetin()">Dönüştür</button>
+    <div id="sonuc"></div>
+
+    <script>
+        const a = "1";
+        const b = 3;
+        console.log(a + b); // 13
+
+        console.log(+a + b); // 4
+
+
+        // Method'lar
+        const isim = "Mehmet";
+        console.log(isim.toUpperCase()); //MEHMET
+        console.log(isim.toLowerCase()); //mehmet
+
+        const metinDegisti = () => {
+            console.log("Metin Değisti");
+            yeniMetin();
+        }
+
+        const yeniMetin = () => {
+            const mevcut = document.getElementById("metin").value;
+            const yenisi = mevcut.toUpperCase();
+            document.getElementById("sonuc").innerText = yenisi;
+        }
+
+        // String method'ları
+        let text = "jaosdıfjkasdıfasdfo asodıfjasdofıj asodfjasdfoıj";
+        let textLength = text.length;
+
+        const arr = text.split(" "); //  ['jaosdıfjkasdıfasdfo', 'asodıfjasdofıj', 'asodfjasdfoıj']
+        console.log(arr, arr.length);
+        console.log(arr[0]); //jaosdıfjkasdıfasdfo
+
+        // String search
+        const meyveler = "Elma,armut,muz,kivi";
+        let index = meyveler.indexOf("muz");
+        console.log(index);
+
+        if(meyveler.indexOf("elma") >= 0){
+            console.log("elma mevcut.");
+        }else{
+            console.log("elma mevcut değil");
+        }
+
+        if(meyveler.toLowerCase().indexOf("elma") >= 0){
+            console.log("elma mevcut.");
+        }else{
+            console.log("elma mevcut değil");
+        }
+
+
+    </script>
+    
+</body>
+</html>
