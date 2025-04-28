@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .urun {
+            padding:5px;
+            border:1px solid blue;
+            margin:5px;
+        }
+
+        .desc {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fetch</h2>
+    <h3>Bitcoin Fiyatı</h3>
+
+    <div id="urunler">
+
+    </div>
+
+    <script>
+
+
+        fetch('https://dummyjson.com/products/1')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log("Hata oluştur"));
+
+
+        const urunBilgisi = async (urunID) => {
+
+            const url =  `https://dummyjson.com/products/${urunID}`;
+            
+            const resp = await fetch(url);
+
+            const data = await resp.json();
+
+            const div = document.getElementById("urunler");
+
+            const img = `<img src='${data.thumbnail}' width='32'>`
+            div.innerHTML = div.innerHTML + `<div class='urun'> ${img} ${data.title} <div class='desc'>${data.description}</div></div>`;
+
+        }
+
+        const urunler = [1, 2, 3, 4];
+
+        urunler.forEach(id => urunBilgisi(id));
+
+    </script>
+    
+</body>
+</html>

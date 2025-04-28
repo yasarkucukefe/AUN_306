@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/islemler.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2>JavaScript dosyası harici olarak tanımlanabilir.</h2>
+
+    <div>
+        <ul>
+            <li>BMW</li>
+            <li>Nissan</li>
+            <li>Mercedes</li>
+        </ul>
+    </div>
+
+    <div>
+        1'den 100'e kadar olan sayılar:
+        <div id="rakamlar">
+
+        </div>
+    </div>
+
+    <h2>JS ile oluşturmak için:</h2>
+    <div id="araba-listesi">
+        <!-- JS kodu ile araba listesi oluşturulacak -->
+    </div>
+
+    <script>
+        
+        const islem = toplama(3,4);
+        console.log(islem);
+
+        const islem_carpma = carpma(5, 6);
+        console.log(islem_carpma);
+
+        const sonuc = "Toplama = " + islem;
+        const sonucTemplate = `Toplam = ${islem}`;
+
+        // Sayı metodları
+        const a = 3;
+        const b = 4;
+        const ab = a.toString() + b.toString(); // 34
+        console.log(ab);
+
+        // Ondalık kısım ile gösterim
+        const pi = 3.14159;
+        console.log(pi.toFixed(4)); // 3.1416
+
+        // Dönüştürme
+        const a1 = 5.65;
+        const a1_int = parseInt(a1); // parseInt: tamsayıya dönüştürür ! yuvarlama yapmaz! 4.9 => 4
+        console.log(a1_int); // 5.65 => parseInt => 5 ! 6 değil.
+
+        // Yumarlama işlemiş için
+        console.log(Math.round(a1)); // en yakın tamsayıya yuvarlar. Math.round
+
+        // Array'ler
+        const arabalar = ["Nissan","BMW","Mercedes","Ford","Toyota"];
+        const araba1 = arabalar[0]; // Nissan
+        const araba2 = arabalar[2]; // Mercedes
+
+        // Array uzunluğu, kaç elemandan oluştuğu
+        arabalar.length; // 3
+        arabalar.sort(); // array elemanlarını sıralar.
+        console.log(arabalar);
+
+        arabalar.sort();
+        // for each
+        arabalar.forEach (araba => {
+            console.log(araba);
+        })
+
+        // Araba listesinin eklenmesi
+        const div = document.getElementById("araba-listesi");
+        let ul = "<ul>";
+        arabalar.forEach( araba => {
+            ul += `<li>${araba}</li>`;
+        })
+        ul += "</ul>"; // ==  ul = ul + "</ul>"
+        console.log(ul);
+        div.innerHTML = ul;
+
+        // join
+        let arabalar_joined = arabalar.join("</li><li>");
+        console.log(arabalar_joined);
+        div.innerHTML = "<ul><li>" + arabalar_joined + "</li></ul>";
+
+
+        // pop
+        console.log(arabalar);
+        arabalar.pop(); // array'in son elemanı çıkarılır.
+        console.log(arabalar);
+        const araba_cikarilan = arabalar.pop(); // Çıkarılan son elemanı return eder.
+        console.log(arabalar, araba_cikarilan);
+
+        // shift
+        console.log(arabalar);
+        arabalar.shift(); // ilk eleman array'den çıkarılır. Çıkarılan elemanı return eder.
+        console.log(arabalar)
+
+        // push
+        arabalar.push("Subaru"); // array sonuna yeni eleman ekler.
+        console.log(arabalar);
+
+
+        // unshift
+        arabalar.unshift("Volvo"); // array'in başına yeni eleman ekler
+        console.log(arabalar);
+
+        // başka bir array oluşturalım
+        const arabalar2 = arabalar;
+        console.log(arabalar2);
+
+        // arabalar2'den son elemanı çıkaralım.
+        arabalar2.pop();
+        console.log(arabalar2); // ['Volvo', 'Ford', 'Mercedes']
+
+        console.log(arabalar); // ['Volvo', 'Ford', 'Mercedes'] !!!!
+
+        // Array kopyalama işlemi!
+        const arabalar3 = [...arabalar];
+        arabalar3.pop(); // son elemanı çıkar
+        console.log(arabalar3); // ['Volvo', 'Ford']
+        console.log(arabalar); ['Volvo', 'Ford', 'Mercedes']
+
+        // If-else
+        const a3 = 4;
+        if(a3 > 3){
+            console.log("3'ten büyüktür.");
+        }else if (a3 > 2){
+            console.log("2'den büyüktür");
+        }else{
+            console.log("2'ten küçüktür");
+        }
+    
+        // Bir if-else bloğunda, sağlanan bir koşul sonrasındaki kontrollere bakılmaz. Koşulu sağlayan ilk blok sonrasında if bloğundan çıkar.
+        // Yukarıdaki if-else bloğunun konsol çıktısı: "3'ten büyüktür."
+
+        const renkler = ["Kırmızı","Mavi","Siyah"];
+
+        const renk = "Kırmızı"
+
+        let yorum = "*";
+        switch(renk){
+            case "Kırmızı": 
+                yorum = "Neşeli bir kişiliğiniz var.";
+                break;
+            case "Mavi":
+                yorum = "Özgür bir kişiliğiniz var.";
+                break;
+            case "Siyah":
+                yorum = "Ciddi bir kişiliğiniz var.";
+                break;
+            default:
+                yorum = "Yorumu bilinmeyen renk.";
+        }
+
+        console.log(yorum);
+
+        // Döngüler (Loop'lar)
+        const div_rakamlar = document.getElementById("rakamlar");
+        for(let i=1; i<=100; i++){ // 1'den başlayarak, 100'e kadar (100 dahil), 1 artarak
+            //console.log(i);
+            div_rakamlar.innerText = div_rakamlar.innerText + ", " + i;
+        }
+
+
+        // break komutu ile for veya while loop'larından çıkılır.
+        // continue komutu ile loop içerisinde takip eden kod atlanır ama loop devam eder.
+
+        for(let i=0; i<=10; i++){
+            if(i % 2 == 1){ // %: kalan operatörü, 
+                console.log(i);
+            }
+        }
+
+        for(let i=0; i<=10; i++){
+            if(i % 2 == 0){ continue; } // loop'ta kalan kodu atla ama loop'a devam et.
+            console.log(i);
+        }
+
+        for(let i=0; i<=10; i++){
+            if(i % 2 == 0){ continue; } // loop'ta kalan kodu atla ama loop'a devam et.
+            if(i == 5){ break; } // eğer i değeri 5'e eşit ise loop'tan ÇIK.
+            console.log(i);
+        }
+
+
+        // While loop
+        let say = 0;
+        while(say <= 10){
+            console.log(say);
+            say++;
+        }
+
+        say = 0;
+        while(say <= 10){
+            if(say % 2 == 0){  say++; continue; } // loop'ta kalan kodu atla ama loop'a devam et.
+            if(say == 5){ break; } // eğer say değeri 5'e eşit ise loop'tan ÇIK.
+            console.log(say);
+            say++;
+        }
+
+        say = 15;
+        console.log(`say=${say}`);
+        do{ // koşul kontrolu ilk loop sonunda gerçekleşir. Loop mutlaka en az 1 defa çalışır.
+            console.log(say)
+            say++;
+        }while(say <= 10)
+
+
+    </script>
+
+</body>
+</html>
