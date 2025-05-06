@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafta 13 Dersi</title>
+    <style>
+        .indirimli {
+            border: 1px solid green;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .normal {
+            border: 1px solid blue;
+            font-weight: normal;
+        }
+
+        .urun {
+            min-width: 300px;  
+            padding: 5px;         
+        }
+        .urunContainer {
+            margin: 10px; 
+        }
+
+        .cbDiv {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ürünler</h2>
+
+    <div class="urunContainer" style="display: flex; border-bottom: 1px solid black;">
+        <div style="padding: 5px;"><input class="toplu" type="checkbox"></div>
+        <div style="padding: 5px;">ÜRÜN ADI</div>
+    </div>
+
+    <div class="urunContainer" style="display: flex;">
+        <div class="cbDiv"><input type="checkbox"></div>
+        <div class="urun normal" id="urun1">Epson Printer</div>
+    </div>
+    
+    <div class="urunContainer" style="display: flex;">
+        <div class="cbDiv"><input type="checkbox"></div>
+        <div class="urun normal" id="urun2">Apple Mac </div>
+    </div>
+
+    <div class="urunContainer" style="display: flex;">
+        <div class="cbDiv"><input type="checkbox"></div>
+        <div class="urun normal" id="urun3">JBL Kulaklık </div>
+    </div>
+
+    <div class="urunContainer" style="display: flex;">
+        <div class="cbDiv"><input type="checkbox"></div>
+        <div class="urun normal" id="urun4">Kahve Makinası </div>
+    </div>
+  
+
+    <script>
+
+        // Bütün checkbox'lara title ekle
+        const cbs = document.querySelectorAll("input[type=checkbox]");
+       
+        //title attribute ekle
+        cbs.forEach((cb) => {
+            cb.title="İndirim Uygula / kaldır";
+
+            if(cb.closest(".urunContainer")){
+                const divUrun = cb.closest(".urunContainer").querySelector(".urun");
+                if(divUrun){
+                    if(divUrun.classList.contains("indirimli")){
+                        cb.checked = true;
+                    }
+                }
+            }
+        })
+
+
+        //change event listener ekle
+        cbs.forEach((cb) => {
+            cb.addEventListener("change", (event) => {
+
+                if(event.target.classList.contains("toplu")){
+                    butunKutucuklar(event.target.checked);
+                    return;
+                }
+                
+                const div = event.target.parentElement;
+
+                const divUrunContainer = event.target.closest(".urunContainer");
+                
+                if(divUrunContainer){
+                    const divUrun = divUrunContainer.querySelector(".urun");
+
+                    if(event.target.checked === true){
+                        console.log("Kutucuk seçildi");
+                    }else{
+                        console.log("Seçim kaldırıldı.");
+                    }
+
+                    if(divUrun){                        
+                        divUrun.classList.toggle("indirimli");
+                        divUrun.classList.toggle("normal");
+                    }
+                }
+            })
+        })
+
+        const butunKutucuklar = (checkStatus) => {
+            const cbs = document.querySelectorAll("input[type=checkbox]");
+        
+            //title attribute ekle
+            cbs.forEach((cb) => {
+                if(cb.classList.contains("toplu") === false){
+                    cb.checked = checkStatus;
+                    cb.dispatchEvent(new Event("change", {bubbles: true}));
+                }
+            })
+        }
+
+    </script>
+
+
+    
+</body>
+</html>

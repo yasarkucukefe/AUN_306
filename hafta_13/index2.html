@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafta 13 Dersi</title>
+    <style>
+        .indirimli {
+            border: 1px solid green;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .normal {
+            border: 1px solid blue;
+            font-weight: normal;
+        }
+
+        .urun {
+            margin: 10px;   
+            padding: 5px;         
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ürünler</h2>
+    <div class="urun normal" id="urun1">Epson Printer</div>
+    <div class="urun indirimli" id="urun2">Apple Mac </div>
+    <div class="urun indirimli" id="urun3">JBL Kulaklık </div>
+    <div class="urun normal" id="urun4">Kahve Makinası </div>
+
+    <div id="kac-tane"></div>
+    <div id="kac-tane-indirimli"></div>
+
+    <script>
+        // Bütün ürünleri seç
+        const urunler = document.querySelectorAll(".urun");
+        console.log(urunler.length); // 4
+
+        urunler.forEach((urun) => {
+            console.log(urun.innerText);
+            urun.addEventListener("click", (event) => {
+                const elm = event.target; // click event'i gerçekleşen element
+                elm.classList.toggle("indirimli");// toggle: classList "indirimli" içeriyor ise çıkart, içermiyorsa "ekle"
+                elm.classList.toggle("normal");// toggle: classList "normal" içeriyor ise çıkart, içermiyorsa "ekle"
+                indirimOzeti();
+            })
+        } );
+
+        document.querySelector("#kac-tane").innerHTML = `<strong>${urunler.length} tane ürün bulunuyor.</strong>`
+
+        const indirimOzeti = () => {
+
+            const indirimli = document.querySelectorAll(".indirimli");
+
+            document.querySelector("#kac-tane-indirimli").innerText = `${indirimli.length} indirimli ürün var.`;
+        }
+
+
+
+        indirimOzeti();
+
+    </script>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafta 13 Dersi</title>
+    <style>
+        .indirimli {
+            border: 1px solid green;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .normal {
+            border: 1px solid blue;
+            font-weight: normal;
+        }
+
+        .urun {
+            margin: 10px;   
+            padding: 5px;         
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ürünler</h2>
+    <div class="urun normal" id="urun1">Epson Printer</div>
+    <div class="urun indirimli" id="urun2">Apple Mac </div>
+    <div class="urun indirimli" id="urun3">JBL Kulaklık </div>
+    <div class="urun normal" id="urun4">Kahve Makinası </div>
+
+    <script>
+        // Bir HTML elementine id ile ulaşmak için:
+        const u1 = document.getElementById("urun1");
+        const u2 = document.getElementById("urun2");
+
+        // click event listener ekle:
+        u1.addEventListener("click", function(){
+            if(u1.classList.contains('normal')){
+                console.log("İndirim ekle")
+                u1.classList.remove("normal");
+                u1.classList.add("indirimli");
+            }else{
+                console.log("İndirim kaldır")
+                u1.classList.remove("indirimli");
+                u1.classList.add("normal")
+            }
+        })
+
+        
+
+        // Bir HTML elementinde hangi sınıflar var? "classList"
+        console.log(u1.classList); // array döndürür
+
+        // HTML elementinde mevcut bir class'ın çıkarılması
+        u1.classList.remove("normal");
+
+        // HTML elementine yeni bir class eklenmesi
+        u1.classList.add("indirimli");
+
+        // HTML elementinde bir class var mı?
+        u1.classList.contains("normal");
+
+        // Query Selector:
+        // # => id ile seçim
+        // . => class adı ile seçim
+        const u3 = document.querySelector("#urun3");// = document.getElementById("urun3")
+        console.log(u3.innerText)
+
+        u3.classList.remove("indirimli");
+        u3.classList.add("normal");
+
+        const indirimEkleKaldir = () => {
+
+        }
+
+
+
+    </script>
+
+
+    
+</body>
+</html>
