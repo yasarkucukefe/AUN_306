@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies - Cerezler</title>
+</head>
+<body>
+    <h1>!Cookie'lerin çalışması için bu dosyanın bir web sunucusunda servis edilmesi gerekir!</h1>
+
+    <div id="div-merhaba" style="font-size: 1.5em; font-weight: bold;">Merhaba</div>
+
+    <div id="div-yeni">
+        <label for="">Lütfen adınızı yazınız.</label>
+        <input type="text" id="yeni-isim" placeholder="Adınız">
+        <input type="button" onclick="yeni_user()" value="Kaydet">
+    </div>
+       
+    <div id="div-mevcut" style="display: none; margin-top: 10px;">
+        <button onclick="oturumKapat()">Oturumu Kapat</button>
+    </div>
+
+    <script>
+        const yeni_user = () => {
+            const isim = document.querySelector("#yeni-isim").value;
+            // Cookie (Çerez)
+            const sonTarih = new Date();
+            sonTarih.setTime(sonTarih.getTime() + ( 7 * 24 * 60 * 60 * 1000)); // 7 gün sonra milisaniye
+            // document.cookie = "[cookie-adı]=[cookie-değer]; [cookie2-adı]=[cookie2-değer];expiry=Wed, 14 May 2025 23:59:59 GMT"
+            document.cookie = `isim=${isim}; expires=${sonTarih.toUTCString()}` 
+            console.log("Cookie kayıt edildi.");
+            location.reload();
+        }
+
+        const getCookie = (cname) => { // cname: cookie adı
+            const deger = `; ${document.cookie}`;
+            const parts = deger.split(`; ${cname}=`);
+            if(parts.length === 2){
+                 return parts.pop().split(';').shift();
+            }
+            return null;
+        }
+
+        const deleteCookie = (cname) => {
+            document.cookie = `${cname}= ; expires= Thu, 01 Jan 1970 00:00:00 UTC;`
+        }
+
+        // isim adlı çerez tanımlı mı?
+        const isim = getCookie("isim");
+        if(isim !== null){
+            console.log("Mevcut bir kullanıcı var.")
+            document.getElementById("div-yeni").style.display = "none";
+
+            document.querySelector("#div-merhaba").innerText = "Merhaba " + isim;
+            document.querySelector("#div-mevcut").style.display = "block";
+        }
+
+        const oturumKapat = () => {
+            deleteCookie("isim");
+            location.reload(); // Sayfayı yeniden yükle
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

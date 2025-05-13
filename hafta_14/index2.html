@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>JS ile Zamanlama</h1>
+
+    <div id="div-saniye" style="font-size: 4em; text-align: center;">0</div>
+
+    <script>
+        // sayfa yüklendikten 5 saniye sonra çalış
+        setTimeout(()=>alert("5 saniye beklendi"), 5000);
+
+        // setTimeout(function, milisaniye)
+
+        const saniyeSay = () => {
+            let saniye = document.getElementById("div-saniye").innerText;
+            +saniye++; // String => sayıya dönüştür ve 1 arttır.
+            if(saniye>10){return;} // Sadece 10 saniye çalış
+            document.querySelector("#div-saniye").innerText = saniye;
+            setTimeout(()=>{
+                saniyeSay();
+            }, 1000)
+        }
+
+        setTimeout(()=>saniyeSay(), 1000);
+
+    </script>
+    
+</body>
+</html>

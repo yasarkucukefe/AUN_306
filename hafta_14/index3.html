@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>JS ile Zamanlama</h1>
+
+    <div>Progress Bar (Kalan Süre)</div>
+    <progress id="islemProgress" value="10" max="10"></progress>
+    <label for="progress" id="kalanSure"></label>
+
+    <script>
+        
+        
+
+        const kalanSure = () => {
+            const progress = document.getElementById("islemProgress")
+            const kalan = progress.value;
+            progress.value = (+kalan) - 1;  // sayıya dönüştür ve 1 azalt.
+            document.getElementById("kalanSure").innerText = `${progress.value} saniye`;
+            if(kalan === 0){
+                alert("Süreniz doldu. Tekrar başlayınız");
+            }else{
+                setTimeout(kalanSure, 1000);
+            }
+        }
+
+        setTimeout(kalanSure, 1000);
+
+    </script>
+    
+</body>
+</html>
