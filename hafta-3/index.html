@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        select, input {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .form-div{
+            margin-top: 10px;
+        }
+
+        label{
+            font-weight: bold;
+        }
+
+        button{
+            padding: 5px;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Form</h1>
+
+    <form action="#">
+        <!-- label for = 'input element ID' -->
+    
+        <fieldset>
+            <legend>Kişisel Bilgiler</legend>
+            <label for="input-1">İsim</label><br>
+            <!-- required: Zorunlu alan-->
+            <input id="input-1" required type="text"><br>
+            <br>
+            <label for="input-2">Soyisim</label><br>
+            <input id="input-2" type="text">
+
+            <br><br>
+            <label for="input-3">E-posta</label><br>
+            <!-- placeholder: input alan boş ise gösterilen metin-->
+             <!-- type='email' -->
+            <input id="input-3" name="eposta" type="email" placeholder="E-posta adresiniz">
+
+            <br><br>
+            <label for="input-4">Şifre</label><br>
+            <!-- type='password' -->
+            <!-- title='mouse üzerine gelince gösterilen metin, çoğu HTML elementinde kullanılabilir' -->
+            <input id="input-4" name="sifre" type="password" title="Şifre en az 8 karakter olmalıdır.">
+
+
+            <br><br>
+            <label for="input-5">Doğum yılı</label><br>
+            <!-- type='number' Sadece sayısal değerler yazılabilir -->
+            <input id="input-5" name="dogum-yil" type="number">
+
+            <br><br>
+            <label for="input-5">Başvuru Tarihi</label><br>
+            <!-- type='date' Tarih seçimi sağlayan input (Chrome, Edge, Safari) -->
+            <input id="input-6" name="tarih" type="date">
+
+
+            <div class="form-div">
+                <label for="select-sehir">Şehir:</label>
+                <select name="sehirler" id="select-sehir">
+                    <option value="34">İstanbul</option>
+                    <option value="06">Ankara</option>
+                    <option value="35">İzmir</option>
+                    <option value="00">Diğer</option>
+                </select>
+            </div>
+        </fieldset>
+        
+        
+        <div class="form-div">
+            <label for="adres">Adres:</label><br>
+            <textarea name="adres" placeholder="Adres bilgisi" id="adres" rows="4" cols="50"></textarea>
+        </div>
+
+        <div class="form-div">
+            <label for="input-file">Dosya Seçiniz:</label>
+            <!-- type='checkbox' -->
+            <input type="file" id="input-file">
+        </div>
+
+        <div class="form-div">
+            <label for="input-range">Bir günde kaç saat ekran başındasınız?</label><br>
+            <!-- type='range' -->
+            <input type="range" id="input-range" min="0" max="24">
+        </div>
+
+        <div class="form-div">
+            <input type="text" value="Okudum, anladım.">
+        </div>
+
+        <div class="form-div">
+            <!-- type='checkbox' -->
+            <input id="input-checkbox" type="checkbox">
+            <label for="input-checkbox" style="font-weight: normal;">Kullanıcı şartlarını okudum, kabul ediyorum.</label>
+        </div>
+
+        <div class="form-div">
+            <!-- type='radio' -->
+            <label for="">Kayıt deneyimize kaç puan verirsiniz?</label>
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="radio-star" value="1" title="1"></td>
+                    <td><input type="radio" name="radio-star" value="2" title="2"></td>
+                    <td><input type="radio" name="radio-star" value="3" title="3"></td>
+                    <td><input type="radio" name="radio-star" value="4" title="4"></td>
+                    <td><input type="radio" name="radio-star" value="5" title="5"></td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <div class="form-div">
+            <label for="browsers">Kullandığınız Web Tarayıcısı:</label><br>
+            <input type="text" id="input-browser" list="browsers">
+            <datalist id="browsers">
+                <option value="Chrome">
+                <option value="Edge">
+                <option value="Safari">                
+            </datalist>
+        </div>
+
+        <div class="form-div">
+            <input type="submit" value="Kaydet">
+            <button style="margin-left: 50px; color:red">İptal</button>
+        </div>
+
+    </form>
+    
+</body>
+</html>

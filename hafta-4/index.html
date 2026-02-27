@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>CSS</title>
+
+    <style>
+        h1 {
+            color:blue;
+            opacity: 0.8; /* Transparent ayarı */
+        }
+
+        /* ID ile element CSS tanımlama */
+        #haber-div{
+            color: darkblue;
+        }
+
+        /* class adı ile CSS tanımlama */
+        .haber-baslik{
+            color: darkgreen;
+        }
+
+        .haberler {
+            padding: 5px;
+            border: 1px solid darkgray;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
+    </style>
+        
+
+</head>
+<body>
+    <h1>CSS</h1>
+
+    <div>
+        <h2>Günün Haberleri</h2>
+        <div id="haber-div" class="haberler">
+            <ul>
+                <li class="haber-baslik">ABD-İran görüşmeleri Cenevre'de başladı</li>
+                <li class="haber-baslik">AB-Hindistan arasında gümrük anlaşması imzalandı</li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <h2>Ekonomi Haberleri</h2>
+        <div class="haberler">
+            <ul>
+                <li class="haber-baslik">Petrol varil fiyatı 70$ üzerine çıktı</li>
+                <li class="haber-baslik">Altın fiyatları yükselmeye devam ediyor.</li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>

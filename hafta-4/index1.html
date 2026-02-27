@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>CSS</title>
+
+    <style>
+        h1 {
+            color:blue;
+            opacity: 0.8; /* Transparent ayarı */
+        }
+
+        /* ID ile element CSS tanımlama */
+        #haber-div{
+            color: darkblue;
+        }
+
+        /* class adı ile CSS tanımlama */
+        .haber-baslik{
+            color: darkgreen;
+        }
+
+        .haberler {
+            padding: 5px;
+            border: 1px solid darkgray;
+            border-radius: 10px;
+        }
+
+        .div-blok {
+            width: 300px;
+            height: 300px;
+        }
+
+        nav {
+            color: white;
+            background-color: darkblue;
+        }
+
+
+    </style>
+        
+
+</head>
+<body style="margin: 0;">
+    <nav style="display: flex; justify-content: space-between; padding:5px">
+        <div style="display: flex; column-gap: 20px;">
+            <div>HABER PORTALI</div>
+            <div>DÜNYA HABERLERİ</div>
+            <div>EKONOMİ HABERLERİ</div>
+        </div>
+        <div>
+            <div>HESAP OLUŞTUR</div>
+        </div>
+    </nav>
+
+    <section style="padding: 10px;">
+
+        <h1>HABER PORTALI</h1>
+
+        <div style="display: flex; justify-content: space-between;">
+            <!-- Display: flex-->
+            <div style="display: flex; column-gap: 10px;">
+                <div class="div-blok">
+                    <h2>Günün Haberleri</h2>
+                    <div id="haber-div" class="haberler">
+                        <ul>
+                            <li class="haber-baslik">ABD-İran görüşmeleri Cenevre'de başladı</li>
+                            <li class="haber-baslik">AB-Hindistan arasında gümrük anlaşması imzalandı</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="div-blok">
+                    <h2>Ekonomi Haberleri</h2>
+                    <div class="haberler">
+                        <ul>
+                            <li class="haber-baslik">Petrol varil fiyatı 70$ üzerine çıktı</li>
+                            <li class="haber-baslik">Altın fiyatları yükselmeye devam ediyor.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="div-blok">
+                    <h2>Spor Haberleri</h2>
+                    <div class="haberler">
+                        <ul>
+                            <li class="haber-baslik">Kış olimpiyatları sona erdi</li>
+                            <li class="haber-baslik">Fenerbahçe galip geldi.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-left: 2px dashed darkblue;">
+                <div>Google Reklamlar</div>
+                <ul>
+                    <li>Cep telefonu reklamı</li>
+                    <li>Araba reklamı</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- position:absolute -->
+    <footer style="position: absolute; bottom: 1px; padding: 5px;">
+        <span>Haber Portalı bir ABC Ltd. Şti. web sitesidir.</span>
+    </footer>    
+
+    
+
+    
+    
+</body>
+</html>
