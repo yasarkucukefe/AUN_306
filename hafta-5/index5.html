@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+
+    <style>
+        .gorev {
+            margin: 5px 0;
+            color: darkblue;
+        }
+
+        .gorevCb {
+            margin-left: 15px;
+        }
+
+        .gorevTmm {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .gorevSay {
+            margin-left: 20px;
+            color:gray;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>TODO List</h1>
+
+    <div>
+        <input type="text" id="todoInput" placeholder="Yeni Görev...">
+        <button id="addBtn">Ekle</button>
+        <span id="gorevSay" class="gorevSay"></span>
+    </div>
+
+    <div>
+        <ul id="todoList">
+            <!-- Görevler buraya eklenecek -->
+        </ul>
+    </div>
+
+    <script>
+        const addBtn = document.getElementById("addBtn");
+        const todoInput = document.getElementById("todoInput");
+        const todoList = document.querySelector("#todoList");
+        const spanSay = document.getElementById("gorevSay");
+
+        // Fonksiyon tanımlama-alternativ
+        const toplamGörevSay = () => {
+            const liElms = todoList.querySelectorAll("li");
+            let bekleyenSay = 0;
+
+            liElms.forEach(li => {
+                console.log(li.classList);
+                if(li.classList.contains("gorev")){
+                    bekleyenSay++; // 1 arttır
+                }
+            })
+
+            spanSay.textContent = `Bekleyen: ${bekleyenSay} görev. Tamamlanan ${liElms.length - bekleyenSay}` 
+        }
+
+        function addYeniTodo(){
+            const yeniTodoText = todoInput.value;
+            console.log(yeniTodoText);
+
+            if (yeniTodoText.trim() === "") {
+                alert("Lütfen boş metin eklemeyin!");
+                return;
+            }
+
+            if (yeniTodoText.length > 50) {
+                alert("Görev metni çok uzun! En fazla 50 karakter yazılabilir");
+                return;
+            }
+
+            // Listeye ekle
+            const liElm = document.createElement("li");
+            liElm.innerText = yeniTodoText;
+            liElm.classList.add("gorev");// stil sınıfı ekle
+
+            // Tamamlandı kutucuğu ekle (checkbox)
+            const inpCbElm = document.createElement("input");
+            inpCbElm.type = "checkbox";
+            inpCbElm.classList.add("gorevCb"); // still sınıfı ekle
+
+            // Tamamlandı event listener
+            inpCbElm.addEventListener("change",() => {
+                console.log("Görev tamamlandı: " );
+                if(inpCbElm.checked){
+                    liElm.classList.remove("gorev"); // eski stil sınıfını kaldır
+                    liElm.classList.add("gorevTmm"); // tamamlandı stil sınıf ekle
+                    inpCbElm.disabled = true;
+                    toplamGörevSay();
+                } 
+            });
+
+            liElm.append(inpCbElm);
+
+            todoList.append(liElm);
+            toplamGörevSay(); // Toplam görev sayısını güncelle
+
+            // Inputu temizle
+            todoInput.value = "";
+        }
+
+        // Ekle butonuna tıklandığında görev ekle
+        addBtn.addEventListener("click", addYeniTodo);
+
+        // Enter tuşuna basıldığında da görev ekle
+        todoInput.addEventListener("keypress", function(event){
+            if(event.key === "Enter"){
+                addYeniTodo();
+            }
+        });
+
+
+    </script>
+    
+</body>
+</html>
