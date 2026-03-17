@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taş, Kağıt, Makas</title>
+
+    <style>
+        .resim {
+            border:1px solid lightgray;
+            padding:10px;
+        }
+
+        .resim:hover{
+            border-color: blue;
+            cursor: pointer;            
+        }
+
+        .userSecim{
+            background-color: aqua;
+        }
+
+        .kazanan {
+            background-color: lightgreen;
+        }
+
+        .skor {
+            font-size: 30px;
+            font-weight: bold;
+            font-family: monospace;
+            padding-left: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Taş, Kağıt, Makas</h1>
+
+    <div style="display: flex; gap: 30px;">
+        <div onclick="handleResimClicked(1)" id="resim-1" class="resim" title="TAŞ"><img src="img/tas.png" alt="Taş" width="150"></div>
+        <div onclick="handleResimClicked(2)" id="resim-2" class="resim" title="KAĞIT" ><img src="img/paper.png" alt="Kağıt" width="150"></div>
+        <div onclick="handleResimClicked(3)" id="resim-3" class="resim" title="MAKAS" ><img src="img/makas.png" alt="Makas" width="150"></div>
+    </div>
+
+    <div style="display: flex; gap: 50px; margin-top: 20px;">
+        <!-- Oyuncu Sonuçları-->
+        <div id="div-User">
+            <div class="skor" id="divUserSkor">0</div>
+            <div style="border-bottom: 1px solid black;">OYUNCU</div>
+
+        </div>
+        <!-- Bilgisayar Sonuçları-->
+        <div id="div-Computer">
+            <div class="skor" id="divComputerSkor">0</div>
+            <div style="border-bottom: 1px solid black;">BİLGİSAYAR</div>
+
+        </div>
+
+        <div>
+            <button onclick="resetGame()">Oyunu Sıfırla</button>
+        </div>
+    </div>
+
+
+    <script>
+
+        const secimler = ["","Tas","Kagit","Makas"];
+
+        const score = {
+            user: 0,
+            computer: 0
+        };
+
+        function resetGame(){
+            score.user = 0;
+            score.computer = 0;
+            updateSkor();
+
+            // Sonuçları temizle
+            document.getElementById("div-User").querySelectorAll(".secim").forEach(div => div.remove());
+            document.getElementById("div-Computer").querySelectorAll(".secim").forEach(div => div.remove());
+
+            removeSeciliClass();
+        }
+
+        function decideWinner(p1, p2){
+            if (p1 === p2) { return 0;}
+
+            if(p1 === "Tas"){
+                if (p2 === "Makas") { return 1;}
+                if (p2 === "Kagit") { return 2;}
+            }
+
+            if(p1 === "Kagit"){
+                if (p2 === "Tas") { return 1;}
+                if (p2 === "Makas") { return 2;}
+            }
+
+            if(p1 === "Makas"){
+                if (p2 === "Kagit") { return 1;}
+                if (p2 === "Tas") { return 2;}
+            }
+
+        }
+
+        function returnComputerSecim(){
+            const computerSecim = Math.floor(Math.random() * 3) + 1;
+            return computerSecim;
+        }
+
+        function handleResimClicked(hangi){
+
+            removeSeciliClass();
+
+            console.log(hangi);
+            const resimId = "resim-"+hangi;
+            document.getElementById(resimId).classList.add("userSecim");
+            // hangi : Oyuncunun secimi
+            const userSecim = hangi;
+            const computerSecim = returnComputerSecim();
+
+            const userSecimStr = secimler[userSecim];
+            const computerSecimStr = secimler[computerSecim];
+            
+            // Kazananı belirle
+            const sonuc = decideWinner(userSecimStr, computerSecimStr);
+            console.log("Kazanan: " + sonuc);
+
+            // Sonucları göster
+            const divUserSecim = document.createElement("div");
+            divUserSecim.classList.add("secim");
+            divUserSecim.innerText = userSecimStr;
+            if(sonuc === 1){
+                divUserSecim.classList.add("kazanan");
+                score.user++;
+            }
+            document.getElementById("div-User").append(divUserSecim);
+
+            const divComputerSecim = document.createElement("div");
+            divComputerSecim.innerText = computerSecimStr;
+            divComputerSecim.classList.add("secim");
+            if(sonuc === 2){
+                divComputerSecim.classList.add("kazanan");
+                score.computer++;
+            }
+            document.getElementById("div-Computer").append(divComputerSecim);
+
+            updateSkor();           
+
+        }
+
+        function updateSkor(){
+            document.getElementById("divUserSkor").innerText = score.user;
+            document.getElementById("divComputerSkor").innerText = score.computer;
+        }
+
+        function removeSeciliClass(){
+            const resimDivs = document.querySelectorAll(".resim");
+            resimDivs.forEach(div => div.classList.remove("userSecim"));
+        }
+
+
+    </script>
+    
+</body>
+</html>

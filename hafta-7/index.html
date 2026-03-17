@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+
+    <style>
+        .urun {
+            border: 1px solid lightgray;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+        }
+
+        .urunAd {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .urunDescription {
+            font-size: 12px;
+            color: gray;
+            
+        }
+
+        .urun img {
+            margin-top: 10px;
+        }
+
+        .urunPrice {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Fetch</h1>
+    <p>https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch</p>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Link</a>
+
+    <h2>Ürünler</h2>
+
+    
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <!-- Ürünler burada listelenecek. Fetch ile alındıktan sonra -->
+
+    </div>
+
+    <script>
+
+
+        fetch("https://fakestoreapi.com/products")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const divUrunler = document.querySelector("div");
+                data.forEach(urun => {
+                    console.log(urun);
+                    const urunDiv = document.createElement("div");
+                    urunDiv.classList.add("urun");
+
+                    const urunAd = document.createElement("div");
+                    urunAd.classList.add("urunAd");
+                    urunAd.textContent = urun.title;
+
+                    const urunImage = document.createElement("img");
+                    urunImage.src = urun.image;
+                    urunImage.alt = urun.title;
+                    urunImage.style.width = "200px";
+
+                    const urunDescription = document.createElement("div");
+                    urunDescription.classList.add("urunDescription");
+                    urunDescription.textContent = urun.description;
+
+                    const urunPrice = document.createElement("div");
+                    urunPrice.classList.add("urunPrice");
+                    urunPrice.textContent = urun.price;
+
+                    const btnSepeteEkle = document.createElement("button");
+                    btnSepeteEkle.textContent = "Sepete Ekle";
+                    btnSepeteEkle.onclick = function() {
+                        alert(urun.title + " sepete eklendi!");
+                    };
+
+                    urunDiv.appendChild(urunAd);
+                    urunDiv.appendChild(urunDescription);
+                    urunDiv.appendChild(urunImage);
+                    urunDiv.appendChild(urunPrice);
+                    urunDiv.appendChild(btnSepeteEkle);
+
+                    divUrunler.appendChild(urunDiv);
+                });
+            });
+
+    </script>
+    
+</body>
+</html>
