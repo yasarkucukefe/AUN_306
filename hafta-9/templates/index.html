@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App</title>
+</head>
+<body>
+    <h1>Flask App</h1>
+    <p>Bu içerik dosyası (index.html) Flask web sunucusu tarafından gönderilmektedir.</p>
+
+    <a href="/login">Sisteme Giriş</a>
+
+    <button id="btn-data-fetch">Verileri Al</button>
+    <div id="data-container"></div>
+
+
+    <script>
+        function fetchData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('data-container');
+                    container.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                })
+                .catch(error => console.error('Hata:', error));
+        }
+        
+        document.getElementById('btn-data-fetch').addEventListener('click', fetchData);
+
+    </script>
+    
+</body>
+</html>
