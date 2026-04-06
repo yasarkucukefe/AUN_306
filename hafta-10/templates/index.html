@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapılacaklar Listesi</title>
+    <style>
+        input {
+            padding:5px;
+            border-radius: 3px;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: lightgray;
+        }
+
+        .sil {
+            margin-left: 15px;
+            color: red;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yapılacaklar Listesi</h1>
+
+    <form onsubmit="yeni_task(); return false;" action="/yeni" method="POST">
+        <input type="text" id="yeni-task-input" placeholder="Yeni görev ekle" required>
+        <input type="submit" value="Ekle">
+    </form>
+
+    <div>
+        <ul id="task-list"></ul>
+    </div>
+
+
+    <script>
+
+        function listele(){
+            fetch("/tasks")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                liste_olustur(data);
+            }).catch(error => {
+                console.error("Hata:", error);
+            });
+        }
+
+        function liste_olustur(data){
+            const taskList = document.getElementById("task-list");
+            taskList.innerHTML = ""; // Önceki listeyi temizle
+
+            data.forEach(task => {
+                const listItem = document.createElement("li");
+                listItem.textContent = task.task;
+                listItem.id = `task-${task.id}`;
+
+                if(task.done){
+                    listItem.classList.add("done");
+                }else{
+                    const completeCheckbox = document.createElement("input");
+                    completeCheckbox.type = "checkbox";
+                    completeCheckbox.title = "Tamamla";
+                    completeCheckbox.onchange = function() {
+                        fetch(`/complete/${task.id}`, {
+                            method: "POST"
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            listele(); // Listeyi güncelle
+                        }).catch(error => {
+                            console.error("Hata:", error);
+                        });
+                    };
+                    listItem.appendChild(completeCheckbox);
+                }
+
+                const silLable = document.createElement("label");
+                silLable.classList.add("sil");
+                silLable.textContent = "Sil";
+                silLable.onclick = function() {
+                    fetch(`/delete/${task.id}`, {
+                        method: "POST"
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const taskElement = document.getElementById(`task-${task.id}`);
+                        if (taskElement) {
+                            taskElement.remove(); // Görevi listeden kaldır
+                        }
+                    }).catch(error => {
+                        console.error("Hata:", error);
+                    });
+                };
+                listItem.appendChild(silLable);
+
+                taskList.appendChild(listItem);
+            });
+        }
+
+
+        function yeni_task(){
+            console.log("Yeni görev ekleniyor...")
+            const inputNewTask = document.getElementById("yeni-task-input");
+            const yeniTask = inputNewTask.value;
+
+            fetch("/yeni", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ task: yeniTask })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Görevi ekledikten sonra inputu temizle
+                inputNewTask.value = "";
+                // Listeyi güncelle
+                listele();
+            }).catch(error => {
+                console.error("Hata:", error);
+            });
+        }
+
+        listele();
+    </script>
+    
+</body>
+</html>
