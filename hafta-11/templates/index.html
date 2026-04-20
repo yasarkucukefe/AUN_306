@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosya Upload</title>
+
+    <style>
+        body { margin:50px}
+        .upload-container {border:1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px;}
+    </style>
+</head>
+<body>
+
+    <h2>Dosya Yükle</h2>
+
+    <div class="upload-container">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="dosya" required>
+            <br><br>
+            <input type="submit" value="Upload">
+
+
+        </form>
+
+    </div>
+    
+</body>
+</html>

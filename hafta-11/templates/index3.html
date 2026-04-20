@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosya Upload</title>
+
+    <style>
+        body { margin:50px}
+        .upload-container {border:1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px;}
+    </style>
+</head>
+<body>
+
+    <h2>Dosya Yükle</h2>
+
+    <div class="upload-container">
+        <form id="uploadForm" action="#" method="post">
+            <label for="ogrNo">Öğrenci No:</label>
+            <input type="text" name="ogrenciNo" id="ogrNo" placeholder="Öğrenci no." required>
+            <br><br>
+
+            <label for="uploadFile">Ödev Dosyası:</label>
+            <input type="file" id="uploadFile" name="dosya" required>
+            <br><br>
+            <input id="btnSubmit" type="submit" value="Upload">
+        </form>
+        <div id="uploadStatus"></div>
+
+    </div>
+
+    <script>
+
+        const uploadForm = document.getElementById("uploadForm");
+        const btnSubmit = document.getElementById("btnSubmit")
+        const uploadStatus = document.getElementById("uploadStatus");
+
+        function uploadFormFunc(){
+            const formData = new FormData(uploadForm)
+            btnSubmit.disabled = true;
+            uploadStatus.innerHTML = "Dosya yükleniyor..."
+
+            fetch('/upload2', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                btnSubmit.disabled = false;
+                if (data.error){
+                    uploadStatus.style.color = 'red';
+                    uploadStatus.innerHTML = "Error:" + data.error;
+                } else {
+                    uploadStatus.style.color = 'green';
+                    uploadStatus.innerHTML = "Dosya başarıyla yüklendi.";
+                }
+            })
+            .catch(error => {
+                btnSubmit.disabled = false;
+                console.log(error);
+                uploadStatus.style.color = 'red';
+                uploadStatus.innerHTML = "Bir hata oluştu.";
+            })
+        }
+
+        uploadForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            console.log("Form submission engellendi. Form data JS ile yüklenecek.")
+            uploadFormFunc();
+
+        })
+
+    </script>
+    
+</body>
+</html>
