@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosya Upload</title>
+
+    <style>
+        body { margin:50px}
+        .upload-container {border:1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px;}
+
+        .highlight {
+            background-color: #007bff;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Sürükle Bırak ile Dosya Yükle</h2>
+
+    <div class="upload-container">
+        <form id="uploadForm" action="#" method="post">
+            <label for="ogrNo">Öğrenci No:</label>
+            <input type="text" name="ogrenciNo" id="ogrNo" placeholder="Öğrenci no." required>
+            <br><br>
+
+            <label for="uploadFile">Ödev Dosyası:</label>
+            <!-- accept="application/pdf" ile tarayıcı sadece PDF dosyaları gösterir. -->
+            <input type="file" id="uploadFile" name="dosya" accept="application/pdf" required>
+            <br><br>
+            <div style="text-align: center; padding: 20px;">veya</div>
+
+            <!-- Sürükle bırak alanı -->
+            <div id="dropArea" style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
+                Dosyaları buraya sürükle bırak
+            </div>
+
+            <br><br>
+            <input id="btnSubmit" type="submit" value="Upload">
+        </form>
+        <div id="uploadStatus"></div>
+
+    </div>
+
+    <script>
+
+        const MAX_FILE_SIZE = 1 * 1024 * 1024; // Yüklenebilecek maksimum dosya boyutu
+
+        const uploadForm = document.getElementById("uploadForm");
+        const ogrNoInput = document.getElementById("ogrNo");
+        const fileInput = document.getElementById("uploadFile");
+        const btnSubmit = document.getElementById("btnSubmit")
+        const uploadStatus = document.getElementById("uploadStatus");
+        const dropArea = document.getElementById("dropArea");
+
+        // Sürükle bırak olayları için web tarayacısındaki varsayılan davranışı engelle
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, e => {
+                console.log(eventName, "olayı tetiklendi.");
+                e.preventDefault();
+                e.stopPropagation();
+            }, false)
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {
+                dropArea.classList.add('highlight');
+            }, false)
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {
+                dropArea.classList.remove('highlight');
+            }, false)
+        });
+
+        dropArea.addEventListener('drop', e => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0){
+                fileInput.files = files; // Sürüklenen dosyaları file input'a ata
+                console.log("Dosya sürüklendi ve input'a atandı:", files[0].name);
+            }
+        });
+
+        function gosterHataMesaj(mesaj){
+            uploadStatus.style.color = 'red';
+            uploadStatus.innerHTML = mesaj;
+            btnSubmit.disabled = false;
+        }
+
+        async function uploadFormFunc(){
+            const formData = new FormData(uploadForm)
+            btnSubmit.disabled = true;
+            uploadStatus.innerHTML = "Dosya yükleniyor..."
+
+            if (fileInput.files.length === 0){
+                gosterHataMesaj("Lütfen bir dosya seçin.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            // Dosya boyutunu kontrol et
+            if (file.size > MAX_FILE_SIZE) {
+                gosterHataMesaj("Dosya boyutu 1 MB'tan daha büyük olmaz");
+                return;
+            }
+
+            // Dosya türünü kontrol et (sadece PDF dosyalar)
+            if (file.type !== "application/pdf"){
+                gosterHataMesaj("Sadece PDF dosyalar yüklenebilir.");
+                return;
+            }
+            
+            const toBase64 = f => new Promise((res, rej) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(f);
+                reader.onload = () => res(reader.result);
+                reader.onerror = (e) => rej(e);
+            });
+
+            try {
+                const base64File = await toBase64(file);
+
+                const payload = {
+                    ogrenciNo : ogrNoInput.value,
+                    fileName : file.name,
+                    fileData : base64File
+                }
+
+                btnSubmit.disabled = true;
+
+                const response = await fetch('/upload4', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                btnSubmit.disabled = false;
+                if (result[0].error){
+                    const error = result[0].error;
+                    uploadStatus.style.color = 'red';
+                    uploadStatus.innerHTML = error;                    
+                } else {
+                    uploadStatus.style.color = 'green';
+                    uploadStatus.innerHTML = "Dosya başarıyla yüklendi.";
+                }
+            } catch(err) {
+                btnSubmit.disabled = false;
+                uploadStatus.style.color = 'red';
+                uploadStatus.innerText = "Dosya yüklenirken bir oluştu."
+            }
+
+
+            
+        }
+
+        uploadForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            console.log("Form submission engellendi. Form data JS ile yüklenecek.")
+            uploadFormFunc();
+
+        })
+
+    </script>
+    
+</body>
+</html>
