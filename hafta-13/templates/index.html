@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIS Dataset Plot</title>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        #main-row {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            column-gap: 20px;
+        }
+
+        #plot-options {
+            padding: 20px;
+            width: 200px;
+            flex-shrink: 0;
+            border: 1px solid lightgray;
+            margin: 10px;
+        }
+
+        #plot-container {
+            padding: 20px;
+            border: 1px solid lightgray;
+            margin: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .plot-option {
+            margin-top: 20px;
+        }
+
+        select {
+            margin-top: 5px;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>IRIS Dataset Plot</nav>
+
+    <div id="main-row">
+        <div id="plot-options"> 
+            <div class="plot-option">
+                <label for="x-axis" style="display: block;">X Ekseni</label>
+                <select name="x-axis" id="x-axis">
+                    
+                </select>
+            </div>
+            <div class="plot-option">
+                <label for="y-axis" style="display: block;">Y Ekseni</label>
+                <select name="y-axis" id="y-axis">
+                    
+                </select>
+            </div>
+            <div class="plot-option">
+                <label for="plot-type" style="display: block;">Grafik Türü</label>
+                <select name="plot-type" id="plot-type">
+                    <option value="scatter">Nokta Grafiği</option>
+                    <option value="line">Çizgi Grafiği</option>
+                    <option value="bar">Bar grafik</option>
+                    <option value="histogram">Histogram</option>
+                    <option value="box">Kutu grafiği</option>
+                </select>
+            </div>
+
+            <div class="plot-option">
+                <button id="btn-chart" style="padding: 5px;">Grafik Oluştur</button>
+            </div>
+
+
+
+        </div>
+        <div id="plot-container"> Grafik</div>
+
+    </div>
+
+    <script>
+
+
+        function plotOlustur() {
+            const xAxisSelect = document.getElementById('x-axis');
+            const yAxisSelect = document.getElementById('y-axis');
+            const chartType = document.getElementById('plot-type');
+            const chartArea = document.getElementById('plot-container')
+
+            const payroll = {
+                x: xAxisSelect.value,
+                y: yAxisSelect.value,
+                chart: chartType.value
+            }
+
+            chartArea.innerHTML = "<p>Grafik oluşturuyor...</p>"
+
+            fetch("/plot", {
+                method:"POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(payroll)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const { figure } = data;
+                // Clear placeholder text before first plot
+                chartArea.innerHTML = "";
+                Plotly.newPlot(chartArea, figure.data, figure.layout, { responsive: true });
+            })
+            .catch(error => {
+                console.error("Error creating plot:", error);
+                chartArea.innerHTML = "<p>Grafik oluşturulurken bir hata oluştu.</p>";
+            });
+        }
+
+        function getColumnNames() {
+            fetch('/get_column_names')
+                .then(response => response.json())
+                .then(data => {
+                    const xAxisSelect = document.getElementById('x-axis');
+                    const yAxisSelect = document.getElementById('y-axis');
+
+                    data.forEach(column => {
+
+                        if (column === 'species' || column === "species_id") return; // Kategorik ve ID kolonları atla
+
+                        const optionX = document.createElement('option');
+                        optionX.value = column;
+                        optionX.textContent = column;
+                        xAxisSelect.appendChild(optionX);
+
+                        const optionY = document.createElement('option');
+                        optionY.value = column;
+                        optionY.textContent = column;
+                        yAxisSelect.appendChild(optionY);
+                    });
+
+                    yAxisSelect.value = data[1]; // Y ekseni için varsayılan olarak ikinci kolonu seç
+                })
+                .catch(error => console.error('Error fetching column names:', error));
+        }
+
+        getColumnNames();
+
+        const btnChart = document.getElementById("btn-chart")
+
+        btnChart.addEventListener("click", plotOlustur)
+
+    </script>
+    
+</body>
+</html>
