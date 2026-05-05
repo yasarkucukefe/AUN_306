@@ -1,0 +1,7 @@
+## Claude Code Prompts
+
+# Prompt-1
+Please create a spec file to develope a web application using Flask. It will let users to create, view, update, and delete tasks. Use Sqlite3 database in backend. Use Bootstrap css. Save spec file as .spec/CLAUDE.md
+
+# Prompt-2
+user spec file @.spec/CLAUDE.md to develop this web application. 

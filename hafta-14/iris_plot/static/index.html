@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iris Dataset Explorer</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f5f5f5; color: #333; }
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      height: calc(100vh - 50px);
+    }
+    .controls {
+      width: 220px;
+      min-width: 180px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .controls label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .controls select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .controls button {
+      margin-top: 6px;
+      padding: 9px;
+      background: #2980b9;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .controls button:hover { background: #1a6ea8; }
+    #error-msg {
+      font-size: 0.82rem;
+      color: #c0392b;
+      background: #fde8e8;
+      border: 1px solid #e9b0b0;
+      border-radius: 4px;
+      padding: 8px;
+      display: none;
+    }
+    .plot-area {
+      flex: 1;
+      padding: 16px;
+      background: #fafafa;
+    }
+    #plotly-chart {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>Iris Dataset Explorer</header>
+  <div class="container">
+    <div class="controls">
+      <div>
+        <label for="x-axis">X Axis</label>
+        <select id="x-axis"></select>
+      </div>
+      <div>
+        <label for="y-axis">Y Axis</label>
+        <select id="y-axis"></select>
+      </div>
+      <div>
+        <label for="color">Color</label>
+        <select id="color"></select>
+      </div>
+      <div>
+        <label for="chart-type">Chart Type</label>
+        <select id="chart-type"></select>
+      </div>
+      <button id="plot-btn">Plot</button>
+      <div id="error-msg"></div>
+    </div>
+    <div class="plot-area">
+      <div id="plotly-chart"></div>
+    </div>
+  </div>
+
+  <script>
+    const xSel = document.getElementById('x-axis');
+    const ySel = document.getElementById('y-axis');
+    const colorSel = document.getElementById('color');
+    const typeSel = document.getElementById('chart-type');
+    const plotBtn = document.getElementById('plot-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    function addOption(select, value, label) {
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = label || value;
+      select.appendChild(opt);
+    }
+
+    async function init() {
+      const [colsRes, typesRes] = await Promise.all([
+        fetch('/api/columns'),
+        fetch('/api/plot_types'),
+      ]);
+      const cols = await colsRes.json();
+      const types = await typesRes.json();
+
+      cols.numeric.forEach(c => {
+        addOption(xSel, c);
+        addOption(ySel, c);
+      });
+
+      addOption(colorSel, '', 'None');
+      cols.categorical.forEach(c => addOption(colorSel, c));
+
+      types.forEach(t => addOption(typeSel, t));
+    }
+
+    plotBtn.addEventListener('click', async () => {
+      errorMsg.style.display = 'none';
+      const payload = {
+        plot_type: typeSel.value,
+        x: xSel.value,
+        y: ySel.value,
+        color: colorSel.value || null,
+      };
+
+      const res = await fetch('/api/plot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        errorMsg.textContent = err.error || 'An error occurred.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      const fig = await res.json();
+      Plotly.react('plotly-chart', fig.data, fig.layout);
+    });
+
+    init();
+  </script>
+</body>
+</html>

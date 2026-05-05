@@ -1,0 +1,5 @@
+#Prompt-1
+Please create a spec file to develop a web application using Flask. User will select columns of IRIS dataset to see plot in various types user will set. Use promptly to generate plots. Do not use Jinja2. Save the spec file as .spec/CLAUDE.md
+
+#Prompt-2
+use spect file @.spec/CLAUDE.md to develop the web application. 

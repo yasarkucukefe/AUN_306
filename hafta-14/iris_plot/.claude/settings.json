@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/yasarkucukefe/AUN/YBS306/AUN_306/hafta-14/iris_plot/.spec)"
+    ],
+    "additionalDirectories": [
+      "/Users/yasarkucukefe/AUN/YBS306/AUN_306/hafta-14/iris_plot"
+    ]
+  }
+}
